@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Available Rooms</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<h1>Available Rooms</h1>
+
+{% if rooms %}
+<ul>
+    {% for room in rooms %}
+        <li>
+            Room Type: {{ room.room_type }} | Price: ₱{{ room.pricing }}
+            <form action="/reserve" method="POST">
+                <input type="hidden" name="room_id" value="{{ room.id }}">
+                <input type="hidden" name="check_in_date" value="{{ check_in_date }}">
+                <input type="hidden" name="check_out_date" value="{{ check_out_date }}">
+                <button type="submit">Reserve Room</button>
+            </form>
+        </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No available rooms for the selected dates.</p>
+{% endif %}
+
+<a href="/">Back to Home</a>
+
+<footer>
+    <p>&copy; 2024 Hotel Reservation System. All rights reserved.</p>
+</footer>
+<script>
+        // Warn the user when they try to navigate away or exit the page
+        window.addEventListener("beforeunload", function (event) {
+            const message = "Are you sure you want to leave this page?";
+            event.preventDefault(); // Necessary for older browsers
+            event.returnValue = message; // Required for modern browsers
+            return message;
+        });
+    </script>
+</body>
+</html>

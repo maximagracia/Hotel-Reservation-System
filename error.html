@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Error - Inside Out Hotel</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #2E3A24; /* Darker green background */
+            color: #2E3A24; /* Gold text color */
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: url('background.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.85); /* Slightly transparent white */
+            padding: 40px 60px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        h1 {
+            color: #FFD700; /* Gold color */
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        p {
+            color: #333;
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        button {
+            padding: 12px 30px;
+            background-color: #FFD700;
+            color: #2E3A24;
+            font-size: 1.1em;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #FFC107;
+        }
+
+        .button-container {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Booking Error</h1>
+        <p>Sorry, this room is already booked for the selected dates. Please select a different room or choose different dates for your reservation.</p>
+        <div class="button-container">
+            <button onclick="window.location.href='/';">Go Back to Reservation</button>
+        </div>
+    </div>
+</body>
+</html>

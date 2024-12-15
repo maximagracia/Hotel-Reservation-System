@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - myInside Out Hotel</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #fafafa;
+            color: #444;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        h1 {
+            text-align: center;
+            padding: 50px 20px;
+            background-color: #4CAF50;
+            color: white;
+            margin: 0;
+            font-size: 2.5em;
+            letter-spacing: 1px;
+        }
+
+        h2 {
+            color: #4CAF50;
+            border-bottom: 3px solid #4CAF50;
+            padding-bottom: 10px;
+            margin-top: 40px;
+            font-size: 1.8em;
+        }
+
+        p {
+            font-size: 1.1em;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        ul {
+            margin-left: 20px;
+            font-size: 1.1em;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .section {
+            background-color: #fff;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-header {
+            color: #333;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+
+        .section p, .section ul {
+            color: #666;
+        }
+
+        .section ul {
+            padding-left: 20px;
+        }
+
+        .contact-info li {
+            font-size: 1.1em;
+            margin-bottom: 8px;
+        }
+
+        .contact-info li a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+
+        .contact-info li a:hover {
+            text-decoration: underline;
+        }
+
+        /* Button Styles */
+        .button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #45a049;
+        }
+
+        .footer {
+            text-align: center;
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            font-size: 1em;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>About Us</h1>
+    </header>
+
+    <div class="container">
+
+        <section class="section">
+            <h2>Welcome to Inside Out Hotel</h2>
+            <p>At myInside Out Hotel, we believe that a great stay begins with exceptional service and an inviting atmosphere. Nestled in the heart of [Location], our hotel offers a unique blend of comfort, style, and warmth, making it the perfect choice for travelers seeking both relaxation and adventure.</p>
+        </section>
+
+        <section class="section">
+            <h2>Our Mission</h2>
+            <p>Our mission is to provide a memorable experience for every guest through personalized service, high-quality amenities, and a welcoming environment. We strive to create a home away from home where you can unwind and recharge.</p>
+        </section>
+
+        <section class="section">
+            <h2>What We Offer</h2>
+            <ul>
+                <li><strong>Comfortable Accommodations:</strong> Our rooms are designed with your comfort in mind, featuring modern decor, plush bedding, and all the amenities you need for a restful stay.</li>
+                <li><strong>Amazing Dining:</strong> Enjoy delicious meals at our on-site restaurant, where we serve a variety of local and international dishes made from fresh ingredients.</li>
+                <li><strong>Exceptional Service:</strong> Our friendly staff is dedicated to ensuring your stay is enjoyable and hassle-free. From check-in to check-out, we are here to assist you with anything you need.</li>
+                <li><strong>Convenient Location:</strong> Located near popular attractions, shopping areas, and entertainment venues, our hotel provides easy access to everything [Location] has to offer.</li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2>Our Values</h2>
+            <p>We are committed to:</p>
+            <ul>
+                <li><strong>Quality:</strong> Delivering top-notch services and facilities to enhance your stay.</li>
+                <li><strong>Integrity:</strong> Conducting our business with honesty and transparency.</li>
+                <li><strong>Sustainability:</strong> Implementing eco-friendly practices to minimize our environmental impact.</li>
+                <li><strong>Diversity:</strong> Embracing the unique backgrounds and cultures of our guests and staff.</li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2>Your Experience Matters</h2>
+            <p>Your satisfaction is our top priority. We invite you to share your feedback with us so that we can continue to improve and provide the best possible experience for all our guests. Whether you're here for business or pleasure, we are excited to welcome you to myInside Out Hotel!</p>
+        </section>
+
+        <section class="section">
+            <h2>Contact Us</h2>
+            <p>If you have any questions or would like more information about our hotel, please feel free to reach out:</p>
+            <ul class="contact-info">
+                <li>Email: <a href="mailto:info@myinsideouthotel.com">info@myinsideouthotel.com</a></li>
+                <li>Phone: <a href="tel:+631234567890">+63 123 456 7890</a></li>
+                <li>Address: [Insert Address Here]</li>
+            </ul>
+        </section>
+
+        <div class="text-center">
+            <button class="button" onclick="window.location.href='#'">Book Your Stay</button>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2024 myInside Out Hotel | All Rights Reserved</p>
+    </footer>
+
+    <script>
+        // Warn the user when they try to navigate away or exit the page
+        window.addEventListener("beforeunload", function (event) {
+            const message = "Are you sure you want to leave this page?";
+            event.preventDefault(); // Necessary for older browsers
+            event.returnValue = message; // Required for modern browsers
+            return message;
+        });
+    </script>
+
+</body>
+</html>

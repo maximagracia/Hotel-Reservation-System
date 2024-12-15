@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interior Gallery</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: black; /* Set background to black */
+            font-family: Arial, sans-serif;
+            color: white; /* Change text color to white for better contrast */
+        }
+        h1 {
+            text-align: center; /* Center the heading */
+            margin-bottom: 20px;
+        }
+        #gallery {
+            position: relative;
+            height: 100vh; /* Full viewport height */
+            overflow: hidden; /* Prevent overflow */
+        }
+        .image-container {
+            position: absolute;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            display: none; /* Initially hide all images */
+            justify-content: center; /* Center content */
+            align-items: center; /* Center content vertically */
+        }
+        img {
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            object-fit: cover; /* Cover the entire container */
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1; /* Position behind text */
+        }
+        p {
+            position: absolute;
+            bottom: 20px; /* Position from bottom */
+            left: 20px; /* Position from left */
+            color: darkgoldenrod; /* Dark gold color */
+            font-family: 'Times New Roman', Times, serif; /* Font style */
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+            padding: 10px; /* Padding around text */
+            border-radius: 5px; /* Rounded corners */
+            z-index: 2; /* Position above image */
+        }
+        .pagination {
+            text-align: center;
+            margin: 20px 0;
+        }
+        button {
+            padding: 10px 20px; /* Button padding */
+            margin: 0 5px; /* Space between buttons */
+            border: none; /* Remove border */
+            background-color: white; /* Button color */
+            color: black; /* Text color */
+            cursor: pointer; /* Pointer on hover */
+            border-radius: 25px; /* More defined oval shape */
+            font-weight: bold; /* Bold text for buttons */
+        }
+        button:hover {
+            background-color: #e0e0e0; /* Light gray on hover */
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>Interior Gallery</h1>
+    <div id="gallery">
+        <div class="image-container" data-category="interior">
+            <img src="{{ url_for('static', filename='images/interior1.jpg') }}" alt="Interior 1">
+            <p>The hotel interior features a warm and inviting ambiance, with soft lighting, comfortable seating areas, and friendly decor that instantly makes guests feel at home.</p>
+        </div>
+        <div class="image-container" data-category="interior">
+            <img src="{{ url_for('static', filename='images/interior2.jpg') }}" alt="Interior 2">
+            <p>Luxurious materials such as velvet, marble, and gold accents create an atmosphere of elegance. The interior features grand chandeliers and ornate details that exude sophistication.</p>
+        </div>
+        <div class="image-container" data-category="interior">
+            <img src="{{ url_for('static', filename='images/interior3.jpg') }}" alt="Interior 3">
+            <p>The hotel’s interior incorporates natural elements like wood, stone, and plants to create a calming environment. Large windows allow for plenty of natural light and stunning views of the surrounding landscape.</p>
+        </div>
+        <div class="image-container" data-category="interior">
+            <img src="{{ url_for('static', filename='images/interior4.jpg') }}" alt="Interior 4">
+            <p>The interior is designed to be a cozy haven, with plush textiles, warm colors, and intimate seating arrangements that encourage relaxation and social interaction among guests.</p>
+        </div>
+        <div class="image-container" data-category="interior">
+            <img src="{{ url_for('static', filename='images/interior5.jpg') }}" alt="Interior 5">
+            <p>A mix of vintage and modern elements gives the hotel a unique character. Colorful artwork, quirky furnishings, and varied textures create an eclectic vibe that surprises and delights guests.</p>
+        </div>
+        <div class="image-container" data-category="interior">
+            <img src="{{ url_for('static', filename='images/interior6.jpg') }}" alt="Interior 6">
+            <p>The design reflects the local culture through traditional motifs, handcrafted furnishings, and regional artwork. This immersive experience allows guests to connect with the destination on a deeper level.</p>
+        </div>
+        <div class="image-container" data-category="interior">
+            <img src="{{ url_for('static', filename='images/interior7.jpg') }}" alt="Interior 7">
+            <p>A sleek and contemporary design defines the hotel’s interior, showcasing clean lines, minimalist furnishings, and a sophisticated color palette that appeals to style-conscious travelers.</p>
+        </div>
+        <div class="image-container" data-category="interior">
+            <img src="{{ url_for('static', filename='images/interior8.jpg') }}" alt="Interior 8">
+            <p>Bedrooms are designed as sanctuaries of comfort, featuring plush furnishings and bespoke bed linens. A neutral color palette with accent hues creates an inviting space for relaxation.</p>
+        </div>
+        <div class="image-container" data-category="interior">
+            <img src="{{ url_for('static', filename='images/interior9.jpg') }}" alt="Interior 9">
+            <p>Eco-friendly materials and energy-efficient designs characterize the hotel’s interior. Thoughtful touches like recycled furnishings and green spaces promote sustainability without compromising on luxury.</p>
+        </div>
+        <div class="image-container" data-category="interior">
+            <img src="{{ url_for('static', filename='images/interior10.jpg') }}" alt="Interior 10">
+            <p>The interior balances style with practicality, featuring well-designed spaces that cater to both leisure and business travelers. Meeting rooms are equipped with modern amenities while maintaining an elegant aesthetic.</p>
+        </div>
+    </div>
+
+    <div class="pagination">
+        <button id="prev" onclick="changePage(-1)">Previous</button>
+        <span id="page-info">Page 1</span>
+        <button id="next" onclick="changePage(1)">Next</button>
+    </div>
+
+    <script>
+        let currentPage = 1;
+        const imagesPerPage = 1; // Show one image per page
+        const imageContainers = document.querySelectorAll('#gallery .image-container');
+        const totalImages = imageContainers.length;
+        const totalPages = Math.ceil(totalImages / imagesPerPage);
+
+        function displayImages() {
+            // Show images based on current page
+            imageContainers.forEach((container, index) => {
+                container.style.display = (index === currentPage - 1) ? 'flex' : 'none'; // Show one image at a time
+            });
+            document.getElementById('page-info').innerText = `Page ${currentPage} of ${totalPages}`;
+        }
+
+        function changePage(direction) {
+            currentPage += direction;
+            if (currentPage < 1) currentPage = 1;
+            if (currentPage > totalPages) currentPage = totalPages;
+            displayImages();
+        }
+
+        // Initialize
+        displayImages();
+    </script>
+    <script>
+        // Warn the user when they try to navigate away or exit the page
+        window.addEventListener("beforeunload", function (event) {
+            const message = "Are you sure you want to leave this page?";
+            event.preventDefault(); // Necessary for older browsers
+            event.returnValue = message; // Required for modern browsers
+            return message;
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deluxe Room</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 1rem;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline-block;
+            margin-right: 20px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .carousel {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .carousel-inner {
+            display: flex;
+            transition: transform 0.5s ease;
+            height: 100%;
+        }
+
+        .carousel-item {
+            min-width: 100%;
+            height: 100%;
+        }
+
+        .carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .carousel-caption {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+        }
+
+        button.prev, button.next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.7);
+            border: none;
+            cursor: pointer;
+        }
+
+        button.prev { left: 10px; }
+        button.next { right: 10px; }
+
+        footer { text-align: center; padding: 1rem; background-color: #333; color: white; }
+
+        section {
+            padding: 2rem;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/rooms/deluxe">Deluxe Room</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div class="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="{{ url_for('static', filename='images/deluxe_bed.jpg') }}" alt="Deluxe Room">
+            <div class="carousel-caption">
+                <h5>Deluxe Bed Room</h5>
+                <p>Experience luxury in our Deluxe Room with a plush king-size bed.</p>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="{{ url_for('static', filename='images/deluxe_area.jpg') }}" alt="Deluxe Room - Lounge">
+        </div>
+        <div class="carousel-item">
+            <img src="{{ url_for('static', filename='images/deluxe_jazz.jpg') }}" alt="Deluxe Room - Bathroom">
+        </div>
+        <div class="carousel-item">
+            <img src="{{ url_for('static', filename='images/deluxe_cr.jpg') }}" alt="Deluxe Room - Bathroom">
+        </div>
+        <div class="carousel-item">
+            <img src="{{ url_for('static', filename='images/deluxe_essentials.jpg') }}" alt="Deluxe Room - Bathroom">
+        </div>
+    </div>
+
+    <!-- Controls -->
+    <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
+    <button class="next" onclick="changeSlide(1)">&#10095;</button>
+</div>
+
+<!-- Description of Deluxe Room -->
+<section id="deluxe-room">
+    <h2>Deluxe Room</h2>
+
+    <h3>Overview</h3>
+    <p><strong>The Deluxe Room</strong> is a premium accommodation option designed to provide an elevated experience for guests seeking comfort and sophistication during their stay. These rooms are characterized by their spacious layouts, luxurious furnishings, and an array of high-end amenities that cater to both leisure and business travelers.</p>
+
+    <h3>Room Configuration</h3>
+    <p>Deluxe Rooms typically feature a <strong>king-sized bed</strong> or <strong>twin beds</strong>, allowing for flexibility based on guest preferences. The king-sized bed, measuring approximately 76 inches wide by 80 inches long, offers ample sleeping space, making it ideal for couples or individuals who appreciate roominess. Twin bed configurations provide separate sleeping spaces for friends or family members traveling together.</p>
+
+    <h3>Design and Atmosphere</h3>
+    <p>The design of a Deluxe Room often reflects contemporary elegance, incorporating stylish decor and thoughtful layouts that create a serene environment. Guests can expect high-quality materials, such as premium linens with thread counts often exceeding 500, plush pillows (including hypoallergenic options), and tasteful artwork that enhances the overall aesthetic.</p>
+
+    <h3>Featured Amenities</h3>
+    <ul>
+        <li><strong>Spacious Bathroom:</strong> Most Deluxe Rooms include a luxurious en-suite bathroom featuring both a separate bathtub and a rainfall shower. High-end toiletries and plush bathrobes enhance the bathing experience.</li>
+        <li><strong>Entertainment Options:</strong> Guests can enjoy Internet Protocol Television (IPTV) with access to numerous cable channels, along with high-speed Wi-Fi throughout the room.</li>
+        <li><strong>Comfort Features:</strong> Additional amenities may include air conditioning, soundproof walls for privacy, coffee and tea-making facilities, a mini-fridge, and an in-room safe for valuables.</li>
+        <li><strong>Work Space:</strong> A dedicated work desk is often provided, equipped with charging ports and good lighting for business travelers needing to stay productive.</li>
+    </ul>
+
+    <h3>Ideal for Various Guests</h3>
+    <ul>
+        <li><strong>Couples:</strong> Perfect for romantic getaways or special occasions where comfort and luxury are paramount.</li>
+        <li><strong>Families:</strong> Many Deluxe Rooms can accommodate small families, offering additional bedding options like rollaway beds or sofa beds.</li>
+        <li><strong>Business Travelers:</strong> The spacious layout and work-friendly amenities make it an excellent choice for professionals traveling for work.</li>
+    </ul>
+
+    <h3>Booking Considerations</h3>
+    <p>When reserving a Deluxe Room, guests should consider their specific needs regarding bed configuration and additional services. Some hotels may offer unique features such as views of the city skyline or access to exclusive lounges. It's advisable to review the room details carefully to ensure that all desired amenities are included in the booking.</p>
+
+    <h3>Conclusion</h3>
+    <p>The Deluxe Room represents an exceptional lodging option that combines luxury, comfort, and functionality. With its elegant design and comprehensive amenities, it provides an inviting retreat for all types of travelers seeking an enhanced hotel experience.</p>
+</section>
+
+<script>
+let currentSlide = 0;
+
+function changeSlide(direction) {
+    const slides = document.querySelectorAll('.carousel-item');
+    slides[currentSlide].classList.remove('active');
+    currentSlide = (currentSlide + direction + slides.length) % slides.length;
+    slides[currentSlide].classList.add('active');
+    document.querySelector('.carousel-inner').style.transform = 'translateX(' + (-currentSlide * 100) + '%)';
+}
+
+setInterval(() => changeSlide(1), 5000);
+</script>
+
+<footer>
+    <p>&copy; 2024 Inside Out Hotel. All rights reserved.</p>
+</footer>
+<script>
+        // Warn the user when they try to navigate away or exit the page
+        window.addEventListener("beforeunload", function (event) {
+            const message = "Are you sure you want to leave this page?";
+            event.preventDefault(); // Necessary for older browsers
+            event.returnValue = message; // Required for modern browsers
+            return message;
+        });
+    </script>
+</body>
+</html>

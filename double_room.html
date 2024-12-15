@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Double Room</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 1rem;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline-block;
+            position: relative;
+            margin-right: 20px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .carousel {
+            position: relative;
+            width: 100%; /* Full width */
+            height: 100vh; /* Full height of viewport */
+            overflow: hidden; /* Hide overflow */
+        }
+
+        .carousel-inner {
+            display: flex;
+            transition: transform 0.5s ease; /* Smooth transition */
+            height: 100%; /* Full height for inner container */
+        }
+
+        .carousel-item {
+            min-width: 100%; /* Each item takes full width */
+            height: 100%; /* Each item takes full height */
+        }
+
+        .carousel-item img {
+            width: 100%; /* Make images responsive */
+            height: 100%; /* Make images occupy full height */
+            object-fit: cover; /* Cover the entire area without cutting off */
+        }
+
+        .carousel-caption {
+           position:absolute;
+           bottom:20px;
+           left:20px;
+           color:white;
+           background-color:rgba(0,0,0,0.5); /* Semi-transparent background */
+           padding:10px;
+       }
+
+       button.prev,
+       button.next {
+           position:absolute;
+           top:50%;
+           transform:translateY(-50%);
+           background-color:rgba(255,255,255,0.7);
+           border:none;
+           cursor:pointer;
+       }
+
+       button.prev { left:10px; } /* Position the previous button */
+
+       button.next { right:10px; } /* Position the next button */
+
+       footer { text-align:center; padding:1rem; background-color:#333; color:white; }
+
+       section {
+           padding: 2rem; /* Add some padding for better readability */
+       }
+   </style>
+</head>
+<body>
+
+<header>
+   <nav>
+       <ul>
+           <li><a href="/">Home</a></li>
+           <li class="dropdown">
+               <span>Rooms & Suites</span>
+               <div class="dropdown-content">
+                   <a href="/rooms/double">Double Room</a>
+               </div>
+           </li>
+       </ul>
+   </nav>
+</header>
+
+<div class="carousel">
+   <div class="carousel-inner">
+       <div class="carousel-item active">
+           <img src="{{ url_for('static', filename='images/double_bed.jpg') }}" alt="Double Room">
+           <div class="carousel-caption">
+               <h5>Bed Room</h5>
+               <p>Enjoy a spacious stay in our Double Room with flexible bed configurations.</p>
+           </div>
+       </div>
+       <div class="carousel-item">
+           <img src="{{ url_for('static', filename='images/double_lounge.jpg') }}" alt="Double Room - View 2">
+           <div class="carousel-caption">
+           </div>
+       </div>
+       <div class="carousel-item">
+           <img src="{{ url_for('static', filename='images/double_area.jpg') }}" alt="Double Room - View 3">
+           <div class="carousel-caption">
+           </div>
+       </div>
+       <div class="carousel-item">
+           <img src="{{ url_for('static', filename='images/double_comfort.jpg') }}" alt="Double Room - View 4">
+           <div class="carousel-caption">
+           </div>
+       </div>
+       <div class="carousel-item">
+           <img src="{{ url_for('static', filename='images/double_essentials.jpg') }}" alt="Double Room - View 5">
+           <div class="carousel-caption">
+           </div>
+       </div>
+   </div>
+
+   <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
+   <button class="next" onclick="changeSlide(1)">&#10095;</button>
+</div>
+
+<section id="bed-room">
+    <h2>Bed Room: Double Room</h2>
+
+    <h3>Overview</h3>
+    <p>A <strong>double room</strong> in a hotel is specifically designed to accommodate two guests comfortably. This type of room typically features either one large bed or two separate beds, depending on the hotel's configuration and the guests' preferences. The most common arrangements include a <strong>queen-sized bed</strong>, which measures approximately <strong>60 inches wide by 80 inches long</strong>, or two <strong>full-sized beds</strong>, each measuring about <strong>54 inches wide by 75 inches long</strong>. This flexibility makes double rooms suitable for couples, friends traveling together, or solo travelers who desire extra space.</p>
+
+    <h3>Room Features and Amenities</h3>
+    <p>Double rooms are equipped with essential amenities to enhance the guest experience. Standard features often include:</p>
+    <ul>
+        <li><strong>En-suite Bathroom:</strong> Most double rooms come with a private bathroom that includes basic toiletries and towels.</li>
+        <li><strong>Comfortable Bedding:</strong> High-quality linens and pillows are provided to ensure a restful night's sleep.</li>
+        <li><strong>Seating Area:</strong> Many double rooms offer a small seating area with chairs or a sofa, allowing guests to relax or entertain visitors.</li>
+        <li><strong>Work Desk:</strong> A desk is typically included for those who may need to work during their stay.</li>
+        <li><strong>Mini Fridge:</strong> Some rooms come equipped with a mini fridge for storing beverages and snacks.</li>
+        <li><strong>Television and Wi-Fi:</strong> Entertainment options such as cable TV and complimentary Wi-Fi are standard in most double rooms.</li>
+    </ul>
+
+    <h3>Size and Layout</h3>
+    <p>The size of a double room can vary significantly between hotels. On average, these rooms range from <strong>10 to 20 square meters</strong> (approximately <strong>108 to 215 square feet</strong>). The layout is generally designed to maximize space while providing comfort and functionality. Guests can expect a well-organized area that allows for easy movement and access to amenities.</p>
+
+    <h3>Ideal for Various Guests</h3>
+    <p>Double rooms cater to a diverse range of travelers. They are particularly popular among:</p>
+    <ul>
+        <li><strong>Couples:</strong> Ideal for romantic getaways or vacations where intimacy and comfort are priorities.</li>
+        <li><strong>Friends:</strong> Perfect for friends traveling together who prefer separate sleeping arrangements without compromising on comfort.</li>
+        <li><strong>Solo Travelers:</strong> Individuals seeking more space than a single room offers will find double rooms accommodating.</li>
+    </ul>
+
+    <h3>Booking Considerations</h3>
+    <p>When booking a double room, it is essential for guests to review the specific details provided by the hotel. This includes understanding the bed configuration, room size, and available amenities. Some hotels may offer upgraded versions of double rooms that feature additional space or enhanced amenities, such as better views or larger bathrooms.</p>
+
+    <h3>Conclusion</h3>
+    <p>In summary, double rooms provide an excellent balance of comfort and functionality, making them an ideal choice for various types of travelers. With thoughtful amenities and flexible bed configurations, they cater to the needs of couples, friends, and solo adventurers alike.</p>
+</section>
+
+<script>
+// JavaScript for Carousel Functionality
+let currentSlide = 0;
+
+function changeSlide(direction) {
+   const slides = document.querySelectorAll('.carousel-item');
+
+   // Hide current slide
+   slides[currentSlide].classList.remove('active');
+
+   // Update current slide index
+   currentSlide = (currentSlide + direction + slides.length) % slides.length;
+
+   // Show new slide
+   slides[currentSlide].classList.add('active');
+
+   // Adjust transform for sliding effect
+   const carouselInner = document.querySelector('.carousel-inner');
+   carouselInner.style.transform = 'translateX(' + (-currentSlide * 100) + '%)';
+}
+
+// Optional auto-slide every few seconds
+setInterval(() => changeSlide(1), 5000); // Change slide every 5 seconds
+</script>
+
+<footer>
+   <p>&copy; 2024 Hotel Reservation System. All rights reserved.</p>
+</footer>
+<script>
+        // Warn the user when they try to navigate away or exit the page
+        window.addEventListener("beforeunload", function (event) {
+            const message = "Are you sure you want to leave this page?";
+            event.preventDefault(); // Necessary for older browsers
+            event.returnValue = message; // Required for modern browsers
+            return message;
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Reservation - Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Roboto, sans-serif';
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Tooltip Styles */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 150px;
+            background-color: #ffcc00;
+            color: #444;
+            text-align: center;
+            border-radius: 5px;
+            padding: 5px 10px;
+            position: absolute;
+            z-index: 1;
+            bottom: 100%;
+            left: 50%;
+            opacity: 0;
+            transform: scale(0);
+            transition: opacity 0.3s, transform 0.3s;
+            border: 1px solid #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        @media (max-width: 600px) {
+            .tooltip .tooltiptext {
+                width: auto; /* Allow for flexible width on small screens */
+                left: 50%;
+                transform: translateX(-50%);
+        }
+        }
+        /* Carousel Styles */
+        .carousel {
+            position: relative;
+            max-width: 100%;
+            overflow: hidden;
+        }
+
+        .carousel-images {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .carousel-item {
+            position: relative;
+            min-width: 100%;
+        }
+
+        .carousel-images img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .caption {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 35px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            text-align: center;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        /* Check Availability Form Styles */
+        .check-availability {
+            text-align: center;
+            margin-top: 20px;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+            color: white;
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+        }
+
+        /* Navigation Styles */
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        nav ul li {
+            position: relative;
+            margin-right: 20px;
+        }
+
+        nav ul li a, nav ul li span {
+            color: #FFD700;
+            text-decoration: none;
+            padding: 10px 15px;
+        }
+
+
+        /* Offer Section Styles */
+        .offer-section {
+            background-color: #FFD700; /* Gold background */
+            color: #333; /* Dark text for contrast */
+            text-align: center;
+            padding: 50px 20px;
+            margin-top: 50px;
+            opacity: 0; /* Initially hidden */
+            transform: translateY(50px); /* Start from below */
+            transition: opacity 0.6s ease, transform 0.6s ease; /* Smooth fade-in */
+        }
+
+        .offer-section.visible {
+            opacity: 1;
+            transform: translateY(0); /* Move to its final position */
+        }
+
+        .offer-section h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .offer-section p {
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        .offer-section button {
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+        }
+
+        /* Footer Styles */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #33413a;
+            color: white;
+        }
+
+        /* Loading Spinner Styles */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li class="tooltip">
+                    <a href="{{ url_for('admin_login') }}">
+                        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Inside Out Hotel Logo" style="height: 70px; width:auto;" onerror="this.style.display='none';">
+                    </a>
+                    <span class="tooltiptext">Admin Login</span>
+                </li>
+                <li class="tooltip"><a href="{{ url_for('index') }}">HOME</a><span class="tooltiptext">Go to Home Page</span></li>
+                <li class="tooltip dropdown">
+                    <span>ROOMS</span>
+                    <span class="tooltiptext">Explore Room Options</span>
+                    <div class="dropdown-content">
+                        <a href="/rooms/single">Single Room</a>
+                        <a href="/rooms/double">Double Room</a>
+                        <a href="/rooms/deluxe">Deluxe Room</a>
+                        <a href="/rooms/suite">Suite Room</a>
+                    </div>
+                </li>
+                <li class="tooltip dropdown">
+                    <span>GALLERY</span>
+                    <span class="tooltiptext">View Photos</span>
+                    <div class="dropdown-content">
+                        <a href="/gallery/interior">Interior</a>
+                        <a href="/gallery/exterior">Exterior</a>
+                        <a href="/gallery/landscape">Landscape</a>
+                        <a href="/gallery/architecture">Architecture</a>
+                    </div>
+                </li>
+                <li class="tooltip"><a href="{{ url_for('overview') }}">OVERVIEW</a><span class="tooltiptext">Hotel Overview</span></li>
+                <li class="tooltip dropdown">
+                    <span>LEGALS</span>
+                    <span class="tooltiptext">Legal Information</span>
+                    <div class="dropdown-content">
+                        <a href="/legals/terms_conditions">Terms and Condition</a>
+                        <a href="/legals/about">About Us</a>
+                        <a href="/legals/privacy">Privacy Policy</a>
+                    </div>
+                </li>
+                <li class="tooltip"><a href="{{ url_for('feedback') }}">FEEDBACK</a><span class="tooltiptext">Share Your Feedback</span></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="hero">
+        <div class="carousel">
+            <div class="carousel-images" id="carouselImages">
+                <div class="carousel-item">
+                    <img src="{{ url_for('static', filename='images/reception.jpg') }}" alt="Inside Out Hotel">
+                    <div class="caption">INSIDE OUT HOTEL <br> Offers luxury and modern elegance.</div>
+                </div>
+                <div class="carousel-item">
+                    <img src="{{ url_for('static', filename='images/bedding.jpg') }}" alt="Comfortable Stay">
+                    <div class="caption">COMFORTABLE STAY <br> Enjoy restful sleep with our plush bedding.</div>
+                </div>
+                <div class="carousel-item">
+                    <img src="{{ url_for('static', filename='images/dining.jpg') }}" alt="Dining">
+                    <div class="caption">DINING <br> Savor a diverse menu in a cozy setting.</div>
+                </div>
+                <div class="carousel-item">
+                    <img src="{{ url_for('static', filename='images/pool.jpg') }}" alt="Pool">
+                    <div class="caption">COZY POOL <br> The pool is a refreshing oasis for relaxation.</div>
+                </div>
+                <div class="carousel-item">
+                    <img src="{{ url_for('static', filename='images/security.jpg') }}" alt="Pool">
+                    <div class="caption">GUESTS SECURITY AND SAFETY <br> Ensured with surveillance, and trained staff.</div>
+                </div>
+            </div>
+            <div class="check-availability">
+                <form action="/check_availability" method="POST" style="display:inline-flex;" onsubmit="showLoading()">
+                    <input type="date" name="check_in_date" required placeholder="Check-in" style="margin-right:10px; width: 500px; padding: 10px;">
+                    <input type="date" name="check_out_date" required placeholder="Check-out" style="margin-right:10px; width: 500px; padding: 10px;">
+                    <button type="submit" style="border-radius: 15px;">Check Availability</button> <!-- Submit button -->
+                </form>
+                {% if error_message %}
+                    <p style="color:red;">{{ error_message }}</p>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    <form id="search-form" action="/hotel/search" method="GET" style="display: flex; justify-content: center; align-items: center; margin: 20px;">
+    <div style="margin-right: 15px; text-align: center;">
+        <label for="price-min" style="font-weight: bold;">Min Price:</label>
+        <input type="number" id="price-min" name="price_min" placeholder="Min Price" required style="
+            padding: 10px;
+            width: 120px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: border-color 0.3s;
+        ">
+    </div>
+
+    <div style="margin-right: 15px; text-align: center;">
+        <label for="price-max" style="font-weight: bold;">Max Price:</label>
+        <input type="number" id="price-max" name="price_max" placeholder="Max Price" required style="
+            padding: 10px;
+            width: 120px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: border-color 0.3s;
+        ">
+    </div>
+
+    <div style="margin-right: 15px; text-align: center;">
+        <label for="guests" style="font-weight: bold;">Guests:</label>
+        <input type="number" id="guests" name="guests" placeholder="Number of guests" min="1" required style="
+            padding: 10px;
+            width: 120px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: border-color 0.3s;
+        ">
+    </div>
+
+    <div style="margin-right: 15px; text-align: center;">
+        <label for="room-type" style="font-weight: bold;">Room Type:</label>
+        <select id="room-type" name="room_type" style="
+            padding: 10px;
+            width: 130px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: border-color 0.3s;">
+            <option value="">Any</option>
+            <option value="single">Single</option>
+            <option value="double">Double</option>
+            <option value="suite">Suite</option>
+        </select>
+    </div>
+
+    <div style="margin-right: 15px; text-align: center;">
+        <label for="sort-by" style="font-weight: bold;">Sort By:</label>
+        <select id="sort-by" name="sort_by" style="
+            padding: 10px;
+            width: 150px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: border-color 0.3s;">
+            <option value="price_asc">Price: Low to High</option>
+            <option value="price_desc">Price: High to Low</option>
+            <option value="rating_desc">Rating: High to Low</option>
+        </select>
+    </div>
+
+    <button type="submit" style="
+        background-color: #FFD700; /* Gold color */
+        color: white;
+        border: none;
+        cursor: pointer;
+        padding: 10px 20px;
+        border-radius: 5px;
+        transition: background-color 0.3s, transform 0.3s;">
+        Search
+    </button>
+    </form>
+
+    <section class="offer-section" id="offerSection">
+        <h2>Special Offer</h2>
+        <p>Book your stay now and get 20% off your first booking! Enjoy luxury, comfort, and a memorable experience.</p>
+        <button onclick="window.location.href='{{ url_for('reservation_form') }}'">Book Now</button>
+    </section>
+
+    <section class="newsletter">
+    <h2>Stay Updated</h2>
+    <p>Sign up for our newsletter to receive exclusive offers and updates!</p>
+    <form action="/subscribe" method="post">
+        <input type="email" name="email" placeholder="Enter your email address" required>
+        <button type="submit">Subscribe</button>
+    </form>
+    </section>
+
+    <section id="events-and-blog" style="padding: 50px; background-color: #f9f9f9;">
+    <h2 style="text-align: center; color: #333; margin-bottom: 30px;">Events & Blog</h2>
+
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-around; gap: 20px;">
+        <div style="width: 300px; background-color: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+            <img src="static/images/summer.jpg" alt="Event 1" style="width: 100%; height: 200px; object-fit: cover;">
+            <div style="padding: 15px;">
+                <h3 style="font-size: 20px; color: #555;">Summer Fiesta</h3>
+                <p style="font-size: 14px; color: #777;">Join us this summer for a night of music and fun under the stars!</p>
+                <a href="#" style="color: #0056b3; text-decoration: none; font-weight: bold;">Read More</a>
+            </div>
+        </div>
+
+        <div style="width: 300px; background-color: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+            <img src="static/images/recipes.jpg" alt="Blog 1" style="width: 100%; height: 200px; object-fit: cover;">
+            <div style="padding: 15px;">
+                <h3 style="font-size: 20px; color: #555;">Inside Out Recipes</h3>
+                <p style="font-size: 14px; color: #777;">Discover our signature dishes and recreate them at home.</p>
+                <a href="#" style="color: #0056b3; text-decoration: none; font-weight: bold;">Read More</a>
+            </div>
+        </div>
+
+        <div style="width: 300px; background-color: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+            <img src="static/images/holiday.jpg" alt="Event 2" style="width: 100%; height: 200px; object-fit: cover;">
+            <div style="padding: 15px;">
+                <h3 style="font-size: 20px; color: #555;">Holiday Specials</h3>
+                <p style="font-size: 14px; color: #777;">Celebrate the holiday season with exclusive packages and events.</p>
+                <a href="#" style="color: #0056b3; text-decoration: none; font-weight: bold;">Read More</a>
+            </div>
+        </div>
+    </div>
+    </section>
+
+    <section id="awards-accreditations" style="padding: 50px; background: linear-gradient(to bottom, #f8f9fa, #e9ecef);">
+    <h2 style="text-align: center; color: #2c3e50; font-size: 32px; margin-bottom: 30px; text-transform: uppercase; font-weight: bold;">
+        Awards & Accreditations
+    </h2>
+
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px;">
+        <div style="width: 220px; text-align: center; background-color: #fff; border: 2px solid #dcdcdc; border-radius: 10px; padding: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+            <img src="static/images/award1.jpg" alt="Award 1" style="width: 100%; height: auto; object-fit: contain; border-radius: 5px;">
+            <p style="margin-top: 15px; font-size: 16px; color: #2c3e50; font-weight: bold;">Best Hotel of the Year 2023</p>
+        </div>
+
+        <div style="width: 220px; text-align: center; background-color: #fff; border: 2px solid #dcdcdc; border-radius: 10px; padding: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+            <img src="static/images/award2.jpg" alt="Award 2" style="width: 100%; height: auto; object-fit: contain; border-radius: 5px;">
+            <p style="margin-top: 15px; font-size: 16px; color: #2c3e50; font-weight: bold;">Green Hotel Certification</p>
+        </div>
+
+        <div style="width: 220px; text-align: center; background-color: #fff; border: 2px solid #dcdcdc; border-radius: 10px; padding: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+            <img src="static/images/award3.jpg" alt="Award 3" style="width: 100%; height: auto; object-fit: contain; border-radius: 5px;">
+            <p style="margin-top: 15px; font-size: 16px; color: #2c3e50; font-weight: bold;">Luxury Hospitality Award</p>
+        </div>
+
+        <div style="width: 220px; text-align: center; background-color: #fff; border: 2px solid #dcdcdc; border-radius: 10px; padding: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+            <img src="static/images/award4.jpg" alt="Award 4" style="width: 100%; height: auto; object-fit: contain; border-radius: 5px;">
+            <p style="margin-top: 15px; font-size: 16px; color: #2c3e50; font-weight: bold;">Travelers' Choice 2023</p>
+        </div>
+    </div>
+    </section>
+
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="spinner"></div>
+    </div>
+
+    <section id="faqs" style="padding: 50px; background-color: #f8f9fa;">
+    <h2 style="text-align: center; color: #2c3e50; font-size: 32px; margin-bottom: 40px; text-transform: uppercase; font-weight: bold;">
+        Frequently Asked Questions
+    </h2>
+
+    <div style="max-width: 800px; margin: 0 auto;">
+        <div style="margin-bottom: 20px; border: 1px solid #dcdcdc; border-radius: 10px; background-color: #fff; padding: 15px; transition: all 0.3s ease;">
+            <h3 style="color: #2c3e50; font-size: 18px; cursor: pointer; display: flex; justify-content: space-between;" onclick="toggleFAQ(this)">
+                What is the check-in and check-out time?
+                <span style="transition: transform 0.3s;">&#x25BC;</span>
+            </h3>
+            <p style="color: #555; font-size: 16px; display: none; margin-top: 10px;">
+                Check-in starts at 3:00 PM, and check-out is at 11:00 AM.
+            </p>
+        </div>
+
+        <div style="margin-bottom: 20px; border: 1px solid #dcdcdc; border-radius: 10px; background-color: #fff; padding: 15px; transition: all 0.3s ease;">
+            <h3 style="color: #2c3e50; font-size: 18px; cursor: pointer; display: flex; justify-content: space-between;" onclick="toggleFAQ(this)">
+                Do you allow pets?
+                <span style="transition: transform 0.3s;">&#x25BC;</span>
+            </h3>
+            <p style="color: #555; font-size: 16px; display: none; margin-top: 10px;">
+                Yes, we are a pet-friendly hotel! Please inform us in advance if you're bringing pets.
+            </p>
+        </div>
+
+        <div style="margin-bottom: 20px; border: 1px solid #dcdcdc; border-radius: 10px; background-color: #fff; padding: 15px; transition: all 0.3s ease;">
+            <h3 style="color: #2c3e50; font-size: 18px; cursor: pointer; display: flex; justify-content: space-between;" onclick="toggleFAQ(this)">
+                Is parking available?
+                <span style="transition: transform 0.3s;">&#x25BC;</span>
+            </h3>
+            <p style="color: #555; font-size: 16px; display: none; margin-top: 10px;">
+                Yes, we offer complimentary parking for our guests.
+            </p>
+        </div>
+
+        <div style="margin-bottom: 20px; border: 1px solid #dcdcdc; border-radius: 10px; background-color: #fff; padding: 15px; transition: all 0.3s ease;">
+            <h3 style="color: #2c3e50; font-size: 18px; cursor: pointer; display: flex; justify-content: space-between;" onclick="toggleFAQ(this)">
+                What are the cancellation policies?
+                <span style="transition: transform 0.3s;">&#x25BC;</span>
+            </h3>
+            <p style="color: #555; font-size: 16px; display:none;margin-top :10 px;">
+                Cancellations made at least 48 hours prior to the check-in date will receive a full refund.
+            </p>
+        </div>
+    </div>
+    </section>
+
+    <section class="testimonials">
+    <h2>What Our Guests Say</h2>
+    <div class="testimonial">
+        <p>"The best hotel experience I've ever had! 5-star service and amazing rooms!"</p>
+        <span>- Kirby Winston</span>
+    </div>
+    <div class="testimonial">
+        <p>"A perfect getaway with luxurious comfort. Highly recommend Inside Out Hotel."</p>
+        <span>- Fionah Marie</span>
+    </div>
+    </section>
+
+
+    <footer>
+        <p>&copy; 2024 Inside Out Hotel. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Image Carousel Script
+        let currentImageIndex = 0;
+        const carouselImages = document.getElementById('carouselImages');
+        const images = carouselImages.children;
+
+        function showNextImage() {
+            currentImageIndex = (currentImageIndex + 1) % images.length;
+            carouselImages.style.transform = `translateX(-${currentImageIndex * 100}%)`;
+        }
+
+        setInterval(showNextImage, 3000);
+
+        // Offer Section Animation
+        const offerSection = document.getElementById('offerSection');
+        window.addEventListener('scroll', () => {
+            const offerPosition = offerSection.getBoundingClientRect().top;
+            const screenPosition = window.innerHeight / 1.3;
+            if (offerPosition < screenPosition) {
+                offerSection.classList.add('visible');
+            }
+        });
+
+        function toggleFAQ(element) {
+        const answer = element.nextElementSibling;
+        const isVisible = answer.style.display === "block";
+
+        // Toggle visibility
+        answer.style.display = isVisible ? "none" : "block";
+
+        // Toggle active class for rotation effect
+        if (isVisible) {
+            element.classList.remove('faq-active');
+        } else {
+            element.classList.add('faq-active');
+        }
+    }
+
+        function showLoading() {
+            document.getElementById("loadingOverlay").style.display = "flex"; // Show loading spinner
+        }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Overview - Inside Out Hotel</title>
+    <style>
+        body {
+            font-family: 'Georgia', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #2e3b30;
+            color: #FFD700;
+            line-height: 1.8;
+        }
+
+        header {
+            background-color: #33413a;
+            color: #FFD700;
+            padding: 40px 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin: 0;
+            padding: 0;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .content {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: #3e4c40;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        h2 {
+            font-size: 2rem;
+            color: #FFD700;
+            border-bottom: 3px solid #4CAF50;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            padding-left: 20px;
+            font-size: 1.1rem;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        .footer {
+            background-color: #33413a;
+            color: #FFD700;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 1rem;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .highlight {
+            color: #4CAF50;
+            font-weight: bold;
+        }
+
+        /* Media Query for Mobile View */
+        @media (max-width: 768px) {
+            header {
+                padding: 20px 0;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .content {
+                padding: 15px;
+                margin: 20px;
+            }
+
+            p, ul {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Inside Out Hotel</h1>
+</header>
+
+<div class="content">
+    <section>
+        <h2>Welcome to Inside Out Hotel</h2>
+        <p>Inside Out Hotel is a premier destination that blends luxury and comfort with a unique architectural design. Located in the vibrant area of <span class="highlight">Leyte</span>, our hotel offers guests an unparalleled experience, combining modern amenities with personalized service. We pride ourselves on being a safe and inclusive space for all visitors, ensuring that everyone feels welcome and valued.</p>
+    </section>
+
+    <section>
+        <h2>Our Unique Concept</h2>
+        <p>At Inside Out Hotel, we believe in creating an environment that reflects the beauty of both indoor and outdoor living. Our design philosophy is centered around the idea of bringing the outside in, allowing guests to enjoy nature while experiencing the comforts of a luxury hotel. The hotel's layout features expansive windows, open-air spaces, and lush greenery, providing a serene atmosphere that enhances relaxation and enjoyment.</p>
+    </section>
+
+    <section>
+        <h2>Accommodations</h2>
+        <p>Our accommodations are designed with your comfort in mind. Each room is equipped with:</p>
+        <ul>
+            <li><strong>Modern Amenities:</strong> High-speed Wi-Fi, flat-screen TVs, and premium bedding.</li>
+            <li><strong>Stylish Decor:</strong> A blend of contemporary design and local artistry that reflects the culture of <span class="highlight">Leyte</span>.</li>
+            <li><strong>Private Balconies:</strong> Many rooms feature private balconies where guests can unwind while enjoying scenic views.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Culinary Experience</h2>
+        <p>The culinary offerings at Inside Out Hotel are crafted to delight your palate. Our on-site restaurant serves a diverse menu inspired by local flavors and international cuisine. Guests can enjoy:</p>
+        <ul>
+            <li><strong>Seasonal Dishes:</strong> Prepared with fresh ingredients sourced from local markets.</li>
+            <li><strong>Signature Cocktails:</strong> A selection of creative drinks designed to complement your dining experience.</li>
+            <li><strong>Themed Dining Events:</strong> Regularly scheduled events that celebrate different culinary traditions and seasonal themes.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Amenities and Services</h2>
+        <p>Inside Out Hotel offers a wide range of amenities to ensure a comfortable stay:</p>
+        <ul>
+            <li><strong>Spa Services:</strong> Indulge in relaxation with our full-service spa offering various treatments.</li>
+            <li><strong>Fitness Center:</strong> Stay active during your stay with our well-equipped gym.</li>
+            <li><strong>Event Spaces:</strong> Versatile venues for corporate meetings, weddings, and special occasions, complete with professional planning services.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Your Safety and Comfort</h2>
+        <p>Your safety is our priority. Inside Out Hotel adheres to strict health and safety protocols to ensure a clean and secure environment for all guests. Our staff is trained to provide exceptional service while maintaining high standards of hygiene and safety.</p>
+    </section>
+
+    <section>
+        <h2>Conclusion</h2>
+        <p>Inside Out Hotel is more than just a place to stay; it’s an experience designed to rejuvenate your spirit and create lasting memories. Whether you are visiting for business or leisure, we invite you to discover the unique charm of our hotel. We look forward to welcoming you soon!</p>
+    </section>
+</div>
+
+<footer class="footer">
+    <p>&copy; 2024 Inside Out Hotel. All Rights Reserved.</p>
+</footer>
+<script>
+        // Warn the user when they try to navigate away or exit the page
+        window.addEventListener("beforeunload", function (event) {
+            const message = "Are you sure you want to leave this page?";
+            event.preventDefault(); // Necessary for older browsers
+            event.returnValue = message; // Required for modern browsers
+            return message;
+        });
+    </script>
+</body>
+</html>
