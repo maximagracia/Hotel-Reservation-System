@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservation Successful - Inside Out Hotel</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #2E3A24; /* Dark green background */
+            color: #2E3A24; /* Gold text color */
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: url('background.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.85); /* Slightly transparent white */
+            padding: 40px 60px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        h1 {
+            color: #FFD700; /* Gold color */
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        p {
+            color: #333;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            color: #333;
+            font-size: 1.1em;
+            margin: 20px 0;
+        }
+
+        ul li {
+            margin-bottom: 10px;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 30px;
+            background-color: #FFD700; /* Gold button */
+            color: #2E3A24;
+            text-decoration: none;
+            font-size: 1.1em;
+            border-radius: 10px;
+            transition: background 0.3s ease;
+        }
+
+        a:hover {
+            background-color: #FFC107; /* Lighter gold on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Reservation Successful</h1>
+        <p>Thank you for your reservation at Inside Out Hotel!</p>
+        <p>Your booking details are as follows:</p>
+        <ul>
+            <li><strong>Check-in:</strong> {{ check_in }}</li>
+            <li><strong>Check-out:</strong> {{ check_out }}</li>
+            <li><strong>Room Type:</strong> {{ room_type }}</li>
+            <li><strong>Guest Name:</strong> {{ guest_name }}</li>
+            <li><strong>Email:</strong> {{ email }}</li>
+            <li><strong>Phone:</strong> {{ phone }}</li>
+        </ul>
+        <a href="{{ url_for('index') }}">Return to Home</a>
+    </div>
+    <script>
+        // Warn the user when they try to navigate away or exit the page
+        window.addEventListener("beforeunload", function (event) {
+            const message = "Are you sure you want to leave this page?";
+            event.preventDefault(); // Necessary for older browsers
+            event.returnValue = message; // Required for modern browsers
+            return message;
+        });
+    </script>
+</body>
+</html>

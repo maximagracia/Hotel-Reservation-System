@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscription Confirmation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            color: #33413a;
+        }
+
+        .thank-you {
+            text-align: center;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 40px 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .thank-you h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #33413a; /* Dark green */
+        }
+
+        .thank-you p {
+            font-size: 16px;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .thank-you a {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #ffb84d; /* Mustard yellow */
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .thank-you a:hover {
+            background-color: #e0a03d; /* Slightly darker mustard */
+        }
+    </style>
+</head>
+<body>
+    <div class="thank-you">
+        <h1>Thank You for Subscribing!</h1>
+        <p>Your email <strong>{{ email }}</strong> has been added to our mailing list. We’ll keep you updated with our latest news and offers!</p>
+        <a href="/">Return to Home</a>
+    </div>
+    <script>
+        // Warn the user when they try to navigate away or exit the page
+        window.addEventListener("beforeunload", function (event) {
+            const message = "Are you sure you want to leave this page?";
+            event.preventDefault(); // Necessary for older browsers
+            event.returnValue = message; // Required for modern browsers
+            return message;
+        });
+    </script>
+</body>
+</html>

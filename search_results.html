@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results - Hotel Reservation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #33413a;
+            color: #333;
+        }
+        header {
+            background-color: #FFD700;
+            color: #33413a;
+            padding: 20px;
+            text-align: center;
+        }
+        nav a {
+            color: #33413a;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        main {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            border-bottom: 2px solid #007BFF;
+            padding-bottom: 10px;
+        }
+        #search-summary {
+            margin-bottom: 20px;
+        }
+        #results ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        #results li {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            padding: 15px;
+        }
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #33413a;
+            color: white;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Available Rooms</h1>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/hotel/search">Search Again</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="search-summary">
+            <h2>Your Search Criteria</h2>
+            <p>Price Range: Php{{ price_min }} - Php{{ price_max }}</p>
+            <p>Number of Guests: {{ guests }}</p>
+
+            {% if room_type %}
+                <p>Room Type: {{ room_type }}</p>
+            {% endif %}
+
+            {% if sort_by %}
+                <p>Sorted By: {{ sort_by.replace('_', ' ').title() }}</p>
+            {% endif %}
+        </section>
+
+        <section id="results">
+            <h2>Results</h2>
+
+            {% if rooms %}
+                <ul>
+                    {% for room in rooms %}
+                        <li>
+                            <h3>{{ room[1] }}</h3>
+                            <p><strong>Price:</strong> Php{{ room[2] }}</p>
+                            <p><strong>Capacity:</strong> {{ room[3] }} guests</p>
+                            <p><strong>Description:</strong> {{ room[4] }}</p>
+                            <p><strong>Rating:</strong> {{ room[5] }} / 5</p>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No rooms available matching your criteria. Please try again.</p>
+            {% endif %}
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Inside Out Hotel. All Rights Reserved.</p>
+    </footer>
+    <script>
+        // Warn the user when they try to navigate away or exit the page
+        window.addEventListener("beforeunload", function (event) {
+            const message = "Are you sure you want to leave this page?";
+            event.preventDefault(); // Necessary for older browsers
+            event.returnValue = message; // Required for modern browsers
+            return message;
+        });
+    </script>
+
+</body>
+</html>

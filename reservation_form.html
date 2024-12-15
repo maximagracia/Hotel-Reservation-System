@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservation Form - Inside Out Hotel</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #2E3A24; /* Darker green background */
+            color: #2E3A24; /* Gold text color */
+            margin: 0;
+            padding: 20px;
+            background-image: url('background.jpg'); /* Optional background image */
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent white background */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2E3A24; /* Gold color for the main heading */
+            font-size: 2em;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 2px solid #FFD700; /* Gold border */
+            border-radius: 8px;
+            background-color: #fff; /* White background for inputs */
+            color: #333; /* Dark text color for readability */
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="tel"]:focus,
+        select:focus {
+            border-color: #FFC107; /* Lighter gold border on focus */
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(145deg, #FFD700, #FFC107); /* Gold gradient button */
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2em;
+            color: #fff;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background: linear-gradient(145deg, #FFC107, #FFD700); /* Reversed gradient on hover */
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: calc(100% - 20px); /* Ensuring full-width with padding considered */
+        }
+
+        .form-group button {
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .form-group input::placeholder,
+        .form-group select {
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Room Reservation</h1>
+        <form action="{{ url_for('reserve') }}" method="POST">
+            <div class="form-group">
+                <label for="customer_name">Your Name:</label>
+                <input type="text" id="customer_name" name="customer_name" placeholder="Enter your name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Your Email:</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Your Phone:</label>
+                <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+            </div>
+
+            <div class="form-group">
+                <label for="check_in_date">Check-in Date:</label>
+                <input type="date" id="check_in_date" name="check_in_date" placeholder="YYYY-MM-DD" required>
+            </div>
+
+            <div class="form-group">
+                <label for="check_out_date">Check-out Date:</label>
+                <input type="date" id="check_out_date" name="check_out_date" placeholder="YYYY-MM-DD" required>
+            </div>
+
+            <div class="form-group">
+                <label for="room_type">Select Room Type:</label>
+                <select id="room_type" name="room_type" required>
+                    <option value="" disabled selected>Select a room type</option>
+                    <option value="single">Single Room</option>
+                    <option value="double">Double Room</option>
+                    <option value="deluxe">Deluxe Room</option>
+                    <option value="suite">Suite Room</option>
+                </select>
+            </div>
+
+            <button type="submit">Reserve Now</button>
+        </form>
+    </div>
+    <script>
+        // Warn the user when they try to navigate away or exit the page
+        window.addEventListener("beforeunload", function (event) {
+            const message = "Are you sure you want to leave this page?";
+            event.preventDefault(); // Necessary for older browsers
+            event.returnValue = message; // Required for modern browsers
+            return message;
+        });
+    </script>
+</body>
+</html>

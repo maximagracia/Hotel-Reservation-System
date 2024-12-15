@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Guests</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #e0f7e3;
+        }
+
+        td {
+            font-size: 1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .guest-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .table-container {
+            max-width: 100%;
+            overflow-x: auto;
+        }
+
+        @media (max-width: 600px) {
+            table {
+                font-size: 14px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="guest-container">
+            <h1>Guest List</h1>
+
+            {% if message %}
+            <div class="alert alert-info" style="background-color: #e0f7e3; padding: 10px; border-radius: 8px;">
+                {{ message }}
+            </div>
+            {% endif %}
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Customer Name</th>
+                            <th>Check-In</th>
+                            <th>Check-Out</th>
+                            <th>Room Type</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for guest in guests %}
+                        <tr>
+                            <td>{{ guest.id }}</td>
+                            <td>{{ guest.customer_name }}</td>
+                            <td>{{ guest.check_in }}</td>
+                            <td>{{ guest.check_out }}</td>
+                            <td>{{ guest.room_type }}</td>
+                            <td>{{ guest.status }}</td>
+                            <td>
+                                <form action="{{ url_for('cancel_booking', booking_id=guest['id']) }}" method="POST">
+                                    <button type="submit" class="btn btn-danger" style="background-color: #f44336; color: white; border: none; padding: 10px 15px; border-radius: 8px;">Cancel Booking</button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Warn the user when they try to navigate away or exit the page
+        window.addEventListener("beforeunload", function (event) {
+            const message = "Are you sure you want to leave this page?";
+            event.preventDefault(); // Necessary for older browsers
+            event.returnValue = message; // Required for modern browsers
+            return message;
+        });
+    </script>
+</body>
+</html>
